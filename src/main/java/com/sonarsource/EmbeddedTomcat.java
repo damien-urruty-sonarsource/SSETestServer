@@ -59,22 +59,22 @@ public class EmbeddedTomcat {
       }
       resources.addPreResources(resourceSet);
       context.setResources(resources);
-//      context.setClearReferencesHttpClientKeepAliveThread(false);
-//      context.setClearReferencesStopThreads(false);
-//      context.setClearReferencesStopTimerThreads(false);
-//      context.setClearReferencesStopTimerThreads(false);
-//      context.setAntiResourceLocking(false);
-//      context.setReloadable(false);
-//      context.setUseHttpOnly(true);
-//      context.setTldValidation(false);
-//      context.setXmlValidation(false);
-//      context.setXmlNamespaceAware(false);
-//      context.setUseNaming(false);
-//      context.setDelegate(true);
-//      context.setAllowCasualMultipartParsing(true);
-//      context.setCookies(false);
+      context.setClearReferencesHttpClientKeepAliveThread(false);
+      context.setClearReferencesStopThreads(false);
+      context.setClearReferencesStopTimerThreads(false);
+      context.setClearReferencesStopTimerThreads(false);
+      context.setAntiResourceLocking(false);
+      context.setReloadable(false);
+      context.setUseHttpOnly(true);
+      context.setTldValidation(false);
+      context.setXmlValidation(false);
+      context.setXmlNamespaceAware(false);
+      context.setUseNaming(false);
+      context.setDelegate(true);
+      context.setAllowCasualMultipartParsing(true);
+      context.setCookies(false);
       // disable JSP and WebSocket support
-//      context.setContainerSciFilter("org.apache.tomcat.websocket.server.WsSci|org.apache.jasper.servlet.JasperInitializer");
+      context.setContainerSciFilter("org.apache.tomcat.websocket.server.WsSci|org.apache.jasper.servlet.JasperInitializer");
     } catch (Exception e) {
       throw new IllegalStateException("Fail to configure webapp from " + rootFolder, e);
     }

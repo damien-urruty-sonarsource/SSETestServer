@@ -51,14 +51,17 @@ public class EventStreamServlet extends HttpServlet {
     final AsyncContext context = request.startAsync();
     context.setTimeout(TIMEOUT);
     Client client = new Client(context);
+    System.out.println("New client connected");
     context.addListener(new AsyncListener() {
       @Override
       public void onComplete(AsyncEvent event) {
+        System.out.println("Client completed");
         clients.remove(client);
       }
 
       @Override
       public void onError(AsyncEvent event) {
+        System.out.println("Error happened");
         clients.remove(client);
       }
 
@@ -69,6 +72,7 @@ public class EventStreamServlet extends HttpServlet {
 
       @Override
       public void onTimeout(AsyncEvent event) {
+        System.out.println("Client timed out");
         clients.remove(client);
       }
     });

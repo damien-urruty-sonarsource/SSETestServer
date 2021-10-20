@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <script language="javascript">
+            if (!!window.EventSource) {
+                var source = new EventSource('/eventStream');
+
+                source.onmessage = function(e) {
+                    console.log(e.data);
+                };
+            } else {
+                alert("Your browser does not support EventSource!");
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>Main page</h1>
+    </body>
+</html>

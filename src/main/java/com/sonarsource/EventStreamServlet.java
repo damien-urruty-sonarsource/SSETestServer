@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  * Inspired by https://www.howopensource.com/2016/01/java-sse-chat-example/
  * and https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
  */
-@WebServlet(name="EventStreamServlet", urlPatterns = "/eventStream", asyncSupported = true)
+@WebServlet(name = "EventStreamServlet", urlPatterns = "/eventStream", asyncSupported = true)
 public class EventStreamServlet extends HttpServlet {
+  public static final long TIMEOUT = 10 * 60 * 1000L;
 
   private final Timer eventTimer;
   private final List<Client> clients = Collections.synchronizedList(new ArrayList<>());
@@ -48,6 +49,7 @@ public class EventStreamServlet extends HttpServlet {
   private Client newClient(HttpServletRequest request) {
     // Start asynchronous context and add listeners to remove it in case of errors
     final AsyncContext context = request.startAsync();
+    context.setTimeout(TIMEOUT);
     Client client = new Client(context);
     context.addListener(new AsyncListener() {
       @Override

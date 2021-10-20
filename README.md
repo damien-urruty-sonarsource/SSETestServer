@@ -1,7 +1,16 @@
 # SSETestServer
 
-To start the server:
+This server is written using Tomcat 8.5.68, which is the version currently in use in SonarQube.
+
+The server serves two different routes:
+
+* `/eventStream`: this endpoint streams a ping message every 5sec, respecting the [SSE protocol](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
+* `/`: serves [index.html](index.html) that connects through an `EventSource` to the previous endpoint and logs the received events in the browser console
+
+## Start the server:
 
 > ./gradlew run
 
-To check that events are sent, open `http://localhost:8080` in the browser (which opens the `index.html` file). Every five seconds a ping message should be displayed in the console.
+The server should be started on `localhost:8080`.
+
+A command line client can be found at [SSETestClient](https://github.com/damien-urruty-sonarsource/SSETestClient).

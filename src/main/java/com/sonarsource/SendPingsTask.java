@@ -16,6 +16,6 @@ public class SendPingsTask extends TimerTask {
   }
 
   private void sendPing(Client client) {
-    client.send("PING !!!");
+    client.send("" + System.currentTimeMillis());
   }
 }

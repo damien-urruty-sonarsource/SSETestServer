@@ -2,6 +2,7 @@ package com.sonarsource;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * Inspired by https://www.howopensource.com/2016/01/java-sse-chat-example/
  * and https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
  */
-@WebServlet(name = "EventStreamServlet", urlPatterns = "/eventStream", asyncSupported = true)
+@WebServlet(name = "EventStreamServlet", urlPatterns = "/api/sonarlint/streamEvents", asyncSupported = true)
 public class EventStreamServlet extends HttpServlet {
   public static final long TIMEOUT = 10 * 60 * 1000L;
 
@@ -50,8 +51,9 @@ public class EventStreamServlet extends HttpServlet {
     // Start asynchronous context and add listeners to remove it in case of errors
     final AsyncContext context = request.startAsync();
     context.setTimeout(TIMEOUT);
-    Client client = new Client(context);
-    System.out.println("New client connected");
+    List<String> projectKeys = getProjectKeys(request);
+    Client client = new Client(context, projectKeys);
+    System.out.println("New client connected for projects:" + projectKeys);
     context.addListener(new AsyncListener() {
       @Override
       public void onComplete(AsyncEvent event) {
@@ -77,6 +79,14 @@ public class EventStreamServlet extends HttpServlet {
       }
     });
     return client;
+  }
+
+  private List<String> getProjectKeys(HttpServletRequest request) {
+    String projectKeysParameter = request.getParameter("p");
+    if (projectKeysParameter == null) {
+      return Collections.emptyList();
+    }
+    return Arrays.asList(projectKeysParameter.split(","));
   }
 
   @Override

@@ -2,13 +2,16 @@ package com.sonarsource;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.AsyncContext;
 
 public class Client {
   private final AsyncContext clientContext;
+  private final List<String> projectKeys;
 
-  public Client(AsyncContext asyncContext) {
+  public Client(AsyncContext asyncContext, List<String> projectKeys) {
     this.clientContext = asyncContext;
+    this.projectKeys = projectKeys;
   }
 
   public void send(String payload) {

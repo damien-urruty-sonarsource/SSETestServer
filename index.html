@@ -4,7 +4,7 @@
         <meta charset="utf-8"/>
         <script language="javascript">
             if (!!window.EventSource) {
-                var source = new EventSource('/api/sonarlint/streamEvents');
+                var source = new EventSource('/api/push/sonarlint_events');
 
                 source.onmessage = function(e) {
                     console.log(e.data);

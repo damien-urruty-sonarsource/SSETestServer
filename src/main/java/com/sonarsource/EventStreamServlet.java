@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * Inspired by https://www.howopensource.com/2016/01/java-sse-chat-example/
  * and https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
  */
-@WebServlet(name = "EventStreamServlet", urlPatterns = "/api/sonarlint/streamEvents", asyncSupported = true)
+@WebServlet(name = "EventStreamServlet", urlPatterns = "/api/push/sonarlint_events", asyncSupported = true)
 public class EventStreamServlet extends HttpServlet {
   public static final long TIMEOUT = 10 * 60 * 1000L;
 

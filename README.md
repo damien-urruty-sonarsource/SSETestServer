@@ -4,7 +4,7 @@ This server is written using Tomcat 8.5.68, which is the version currently in us
 
 The server serves two different routes:
 
-* `/api/sonarlint/streamEvents`: this endpoint streams a ping message every 5sec, respecting the [SSE protocol](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). The stream remains open for 10min.
+* `/api/push/sonarlint_events`: this endpoint streams a ping message every 5sec, respecting the [SSE protocol](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). The stream remains open for 10min.
 * `/`: serves [index.html](index.html) that connects through an `EventSource` to the previous endpoint and logs the received events in the browser console
 
 ## Start the server:
